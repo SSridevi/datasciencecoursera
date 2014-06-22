@@ -61,24 +61,25 @@ The following files are available for the train and test data. Their description
 
 - 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range  is from 1 to 30. 
 
- Data frames created in R for the course project are:
- features - contain the above names as values of a single column and removed the "-" and "()" from the column values to  make the datset tidy
- Test - obtained by concatenating x_test,y_test and subject_test files such that each observation is in the same row and  the column names were obtained from the features file.
- Train - obtained by concatenating x_train,y_train and subject_train files such that each observation is in the same row  and the column names were obtained from the features file..
- test_train- obtained by merging test and the train files.
- measure_data- contains only the mean and standard deviation measurement columns or values for each subject/activity 
+Data frames created in R for the course project are:
+===================================================
+ --features - contain the above names as values of a single column and removed the "-" and "()" from the column values to  make the datset tidy
+ --Test - obtained by concatenating x_test,y_test and subject_test files such that each observation is in the same row and  the column names were obtained from the features file.
+ --Train - obtained by concatenating x_train,y_train and subject_train files such that each observation is in the same row  and the column names were obtained from the features file..
+ --test_train- obtained by merging test and the train files.
+ --measure_data- contains only the mean and standard deviation measurement columns or values for each subject/activity 
  combination.
- activity_measure - obtained by merging measure_data with activity file to get the descriptive labels for activities
- meltdata<- activity_measure file transposed to contain the Subject,activity,activity_label, variable name and value 
+ --activity_measure - obtained by merging measure_data with activity file to get the descriptive labels for activities
+ --meltdata<- activity_measure file transposed to contain the Subject,activity,activity_label, variable name and value 
  columns. the column names from measure_data are in the "variable" column and the column values from measure_data are in  the "value" column.
- avg_measure<- obtained by averaging the measurement values for each subject by activity.
+ --avg_measure<- obtained by averaging the measurement values for each subject by activity.
 
- The avg_measure dataset attached has variables that were obtained by averaging the mean and standard deviations 
+-- The avg_measure dataset attached has variables that were obtained by averaging the mean and standard deviations 
  measurements of the signals in a signal window sample for each Subject by activity. 
 
- Subject: identifies each of the 30 subjects in the study
- Activity_Label:Description of the activities
- tBodyAccmeanX tBodyAccmeanY tBodyAccmeanZ tBodyAccstdX tBodyAccstdY tBodyAccstdZ tGravityAccmeanX tGravityAccmeanY 
+-- Subject: identifies each of the 30 subjects in the study
+ --Activity_Label:Description of the activities
+ --tBodyAccmeanX tBodyAccmeanY tBodyAccmeanZ tBodyAccstdX tBodyAccstdY tBodyAccstdZ tGravityAccmeanX tGravityAccmeanY 
  tGravityAccmeanZ tGravityAccstdX tGravityAccstdY tGravityAccstdZ tBodyAccJerkmeanX tBodyAccJerkmeanY tBodyAccJerkmeanZ  tBodyAccJerkstdX tBodyAccJerkstdY tBodyAccJerkstdZ tBodyGyromeanX tBodyGyromeanY tBodyGyromeanZ tBodyGyrostdX 
  tBodyGyrostdY tBodyGyrostdZ tBodyGyroJerkmeanX tBodyGyroJerkmeanY tBodyGyroJerkmeanZ tBodyGyroJerkstdX tBodyGyroJerkstdY  tBodyGyroJerkstdZ tBodyAccMagmean tBodyAccMagstd tGravityAccMagmean tGravityAccMagstd tBodyAccJerkMagmean 
  tBodyAccJerkMagstd tBodyGyroMagmean tBodyGyroMagstd tBodyGyroJerkMagmean tBodyGyroJerkMagstd fBodyAccmeanX fBodyAccmeanY  fBodyAccmeanZ fBodyAccstdX fBodyAccstdY fBodyAccstdZ fBodyAccmeanFreqX fBodyAccmeanFreqY fBodyAccmeanFreqZ 
