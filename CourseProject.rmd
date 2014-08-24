@@ -1,0 +1,59 @@
+# Practical Machine Learning - Prediction of the Excercise Manner
+
+# Executive Summary
+In this report we aim to predict the manner in which the exercise was done. To create the prediction model, we Obtained the data from the 
+Weight Lifting Excercise dataset with data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants.They were asked 
+to perform barbell lifts correctly and incorrectly in 5 different ways.The prediction model was built using support vector machines 
+package which was cross validated with high accuracy and less out of sample error rate.Thus, the prediction model is not overfitted and 
+performs very well with the new samples.
+
+## Loading the data
+Obtain the data from the Weight Lifting Excercise dataset with data from accelerometers on the belt, forearm, arm, and dumbell of 6 
+participants.
+load the training dataset into R.
+```{r load}
+setwd("C:/Users/sridevi/Desktop/R Assignments/Practical Machine Learning")
+pml_training<-read.csv("pml-training.CSV")
+head(pml_training)
+```
+## Data Processing
+We are not predicting the data from new window.Thus, we will keep only the records with new_window="no" in the training dataset.
+The statistical measures given in the dataset cannot make good predictors, thus we also remove those variables and keep only the measured 
+variables in our training datasets.
+```{r processing}
+training1<-pml_training[pml_training$new_window=="no",]
+train_name<-grep("^accel_|^magnet|^gyros|^roll|^yaw|^pitch|^total|classe",names(training1))
+train<-training1[,train_name]
+```
+## Data Splitting
+For cross validation purposes and to obtain the out of sample error rate, we split 75% of the training dataset into training and 25% into 
+test datasets using the caret package.
+```{r split}
+library(caret)
+intrain<-createDataPartition(y=train$classe,p=0.75,list=FALSE)
+training<-train[intrain,]
+testing<-train[-intrain,]
+dim(training)
+dim(testing)
+```
+## Prediction
+Support vector machines are used to predict the manner in which the excercise was done, if it was done in any of the 5 different ways 
+using all the variables in the training dataset. 
+The prediction model obtained by training the dataset was then used to predict the classe variable or the manner in which the excercise 
+was performed in the testing dataset that was created earlier.
+```{r prediction}
+library(e1071)
+modfit<-svm(classe~., data=training)
+print(modfit)
+pred<-predict(modfit,newdata=testing)
+```
+## Accuracy and error rates
+The predicted values is cross validated with the values in the testing dataset to obtain the out of sample error rate and accuracy.
+Out of sample error rate is the error rate we get on a new and independent datset which the testing dataset we created in our case. 
+```{r accuracy}
+tab<-table(pred,testing$classe)
+tab
+classAgreement(tab)
+```
+The prediction model was cross validated with 94% accuracy and the diagnols in the confusion matrix also shows that the out of sample error rate is very low. 
+
